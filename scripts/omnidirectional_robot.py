@@ -16,7 +16,7 @@ def matriz_cinematica_directa(alphas):
         M[1, i] = np.sin(alpha + np.pi/2)
         # fila 2: 1 para la componente de rotación ω
         M[2, i] = 1.0
-        print(M)
+        #print(M)
     return M
 
 def matriz_cinematica_inversa(alphas):
@@ -35,5 +35,5 @@ if __name__ == "__main__":
     M   = matriz_cinematica_directa(alphas_rad)
     Minv = matriz_cinematica_inversa(alphas_rad)
 
-    print("M (cinemática directa):\n", M)
+    #print("M (cinemática directa):\n", M)
     print("\nM⁻¹ (cinemática inversa):\n", Minv)
