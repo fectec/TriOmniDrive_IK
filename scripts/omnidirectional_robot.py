@@ -1,47 +1,46 @@
+#!/usr/bin/env python3
 import numpy as np
 
-# Parámetros
-S1, S2, S3 = 0, 1, 0
-alpha_1, alpha_2, alpha_3 = 30, 150, 270  # en grados
+def construir_matriz_cinematica(alphas_deg):
+    """
+    Construye la matriz M de cinemática directa (3×3) para un robot
+    omnidireccional de tres ruedas, dadas sus orientaciones en grados.
+    """
+    # Convertir grados a radianes
+    alphas_rad = np.deg2rad(alphas_deg)
+    # Montar M
+    M = np.array([
+        [np.cos(alphas_rad[0] + np.pi/2),
+         np.cos(alphas_rad[1] + np.pi/2),
+         np.cos(alphas_rad[2] + np.pi/2)],
+        [np.sin(alphas_rad[0] + np.pi/2),
+         np.sin(alphas_rad[1] + np.pi/2),
+         np.sin(alphas_rad[2] + np.pi/2)],
+        [1.0, 1.0, 1.0]
+    ])
+    return M
 
-# Conversión a radianes
-a1 = np.deg2rad(alpha_1)
-a2 = np.deg2rad(alpha_2)
-a3 = np.deg2rad(alpha_3)
+def main():
+    # 1) Definir ángulos de las ruedas (en grados)
+    alpha_1, alpha_2, alpha_3 = 30, 150, 270
 
-# Cálculo de las contribuciones X e Y de cada rueda
-Wheel_1_X = np.cos(a1 + np.pi/2)
-Wheel_2_X = np.cos(a2 + np.pi/2)
-Wheel_3_X = np.cos(a3 + np.pi/2)
+    # 2) Construir M
+    M = construir_matriz_cinematica([alpha_1, alpha_2, alpha_3])
+    print("M (cinemática directa):")
+    print(M)
 
-Wheel_1_Y = np.sin(a1 + np.pi/2)
-Wheel_2_Y = np.sin(a2 + np.pi/2)
-Wheel_3_Y = np.sin(a3 + np.pi/2)
+    # 3) Calcular inversa de M
+    Minv = np.linalg.inv(M)
+    print("\nM⁻¹ (cinemática inversa):")
+    print(Minv)
 
-# Velocidades lineales del cuerpo
-Linear_Velocity_X = Wheel_1_X + Wheel_2_X + Wheel_3_X
-Linear_Velocity_Y = Wheel_1_Y + Wheel_2_Y + Wheel_3_Y
+    # 4) Ejemplo de uso: dada una velocidad deseada v = [vx, vy, ω]
+    vx, vy, omega = 0.5, 0.2, 0.1  # m/s, m/s, rad/s
+    v = np.array([vx, vy, omega])
 
-# Matriz de cinemática directa M
-M = np.array([
-    [Wheel_1_X, Wheel_2_X, Wheel_3_X],
-    [Wheel_1_Y, Wheel_2_Y, Wheel_3_Y],
-    [       1.0,        1.0,        1.0]
-])
+    # 5) Obtener velocidades de ruedas s = [s1, s2, s3]
+    s = Minv @ v
+    print(f"\nEjemplo de uso:\n  v = [{vx}, {vy}, {omega}] → [s1, s2, s3] = {s}")
 
-# Vector de velocidades de rueda
-S = np.array([S1, S2, S3])
-
-# Velocidad resultante usando multiplicación de matrices
-v = M @ S  # equivalente a M*[S1; S2; S3] en MATLAB
-
-print("Wheel contributions X:", [Wheel_1_X, Wheel_2_X, Wheel_3_X])
-print("Wheel contributions Y:", [Wheel_1_Y, Wheel_2_Y, Wheel_3_Y])
-print(f"\nLinear_Velocity_X = {Linear_Velocity_X:.3f}")
-print(f"Linear_Velocity_Y = {Linear_Velocity_Y:.3f}")
-
-print("\nM (cinemática directa):")
-print(M)
-
-print("\nv = M @ S =")
-print(v)  # [vx, vy, ω], donde ω = S1+S2+S3
+if __name__ == "__main__":
+    main()
