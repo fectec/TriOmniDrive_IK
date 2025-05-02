@@ -16,6 +16,6 @@ joystick_teleop:
           scale: 0.5
           offset: 0.0
         angular-z:                  # Yaw rotation (turning in place)
-          axis: 3                    # Right stick horizontal axis
+          axis: 3                   # Right stick horizontal axis
           scale: 0.5
           offset: 0.0
