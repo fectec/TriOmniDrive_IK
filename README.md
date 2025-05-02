@@ -29,80 +29,58 @@ python3 omni3_inverse_kinematics.py
   <li>
     Install gRPC Tools in Python from 
     <a href="https://pypi.org/project/grpcio-tools/" target="_blank">here</a>:
-    <br>
-    <br>
     <p><code>pip install grpcio grpcio-tools</code></p>
   </li>
-  <br>
   <li>
     Clone this repository:
-    <br>
-    <br>
     <p><code>git clone https://github.com/fectec/TriOmniDrive.git</code></p>
   </li>
-  <br>
   <li>
     <p align="justify">
         Join the robot's onboard Raspberry Pi Wi-Fi network using the provided SSID and password. Once connected, the Raspberry Pi can be accessed at the IP address <code>192.168.2.103</code>.
     </p>
   </li>
-  <br>
   <li>
     <p align="justify">
       Transfer the file <code>scripts/RPIMotorService.py</code>, which implements the gRPC server running on the Raspberry Pi. This server allows the robot to receive velocity instructions remotely over the network and translate them into low-level motor control using GPIO and encoder feedback. The script initializes the robot's physical parameters, sets up encoder interrupts, and runs a PID control loop to achieve the desired wheel speeds. Use the following command from your Ubuntu system:
     </p>
-    <br>
     <p>
-    <code>scp /path/to/TriOmniDrive/scripts/RPIMotorService.py pi@192.168.2.103:/home/pi/omni_ros2/src/oav_utils/scripts
-    </code>
+    <code>scp /path/to/TriOmniDrive/scripts/RPIMotorService.py pi@192.168.2.103:/home/pi/omni_ros2/src/oav_utils/scripts</code>
     </p>
   </li>
-  <br>
   <li>
     <p align="justify">
       After transferring the file, connect to the Raspberry Pi using SSH, navigate to the target directory, verify that the file is present, and execute it:
     </p>
-    <br>
     <p>
     <code>ssh pi@192.168.2.103 # Password is 1234</code><br>
     <code>cd /home/pi/omni_ros2/src/oav_utils/scripts</code><br>
     <code>python3 RPIMotorService.py</code></p>
-    <br>
     <p align="justify">
       At this point, the robot's motor control server will be running and waiting for velocity commands via gRPC.
     </p>
   </li>
-  <br> 
   <li> 
     <p align="justify"> 
       Navigate to the <code>ros2_ws</code> directory in the cloned repository and build the workspace using <code>colcon</code>: 
     </p> 
-    <br> 
-    <code>colcon build --symlink-install</code>
-    <br> 
+    <code>colcon build --symlink-install</code><br>
     <code>source install/setup.bash</code>  
     </p> 
-    <br>
   </li> 
   <li> 
     <p align="justify">
       Connect an Xbox One Elite Series controller (or any joystick). You may customize the joystick config files in:
     </p>
-    <br> 
-    <code>triomnidrive_control/config/joystick_config.yaml
-    </code>
-    <code>triomnidrive_control/config/joystick_teleop.yaml
-    </code>
-    <br>
-    <br> 
+    <ul>
+      <li><code>triomnidrive_control/config/joystick_config.yaml</code></li>
+      <li><code>triomnidrive_control/config/joystick_teleop.yaml</code></li>
+    </ul>
   <li>
     <p align="justify">
-      Run the joystick teleoperation launch file:</p>
-    <br> 
-    <code>ros2 launch triomnidrive_control joystick_teleop.launch.py
-    </code>
-    <br> 
-    <br> 
+      Run the joystick teleoperation launch file:
+    </p>
+    <code>ros2 launch triomnidrive_control joystick_teleop.launch.py</code>
     <p align="justify"> 
       This will start the gRPC client node, joystick driver, and teleoperation node to control the robot. </p> 
   </li> 
