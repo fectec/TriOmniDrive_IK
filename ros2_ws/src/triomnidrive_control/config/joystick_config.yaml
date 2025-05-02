@@ -1,7 +1,7 @@
-joy_teleop:
+joy_node:
   ros__parameters:
     device_id: 0
-    device_name: "Xbox One Elite Series 2"
+    device_name: "Xbox Controller"
     deadzone: 0.2
     autorepeat_rate: 20.0
     sticky_buttons: false

@@ -1,28 +1,21 @@
-joy_teleop:
+joystick_teleop:
   ros__parameters:
     move:
       type: topic
-      interface_type: geometry_msgs/msg/Twist 
+      interface_type: geometry_msgs/msg/Twist
       topic_name: cmd_vel
-      deadman_buttons: [5]  # RB on Xbox controller
+      deadman_buttons: [4]          # RB button on Xbox Series S|X controller
+      require_enable_button: true   # This ensures values reset to zero when deadman button is released
       axis_mappings:
-        twist-linear-x:     # Forward/Backward
-          axis: 1           # Left stick vertical
-          scale: 0.2
+        linear-x:                   # Forward/Backward movement
+          axis: 1                   # Left stick vertical axis
+          scale: 0.5
           offset: 0.0
-        twist-linear-y:     # Strafe Left/Right
-          axis: 0           # Left stick horizontal
-          scale: 0.2
+        linear-y:                   # Left/Right strafe
+          axis: 0                   # Left stick horizontal axis
+          scale: 0.5
           offset: 0.0
-        twist-linear-z:     # Vertical lift (elevator)
-          axis: 4           # Right stick vertical
-          scale: 0.1
-          offset: 0.0
-        twist-angular-y:    # Camera pitch
-          axis: 5           # Right trigger (RT)
-          scale: 0.1
-          offset: -1.0      # RT normally outputs from -1 to 1, offset to get 0 to 1
-        twist-angular-z:    # Rotate yaw (in place rotation)
-          axis: 3           # Right stick horizontal
-          scale: 1.0
+        angular-z:                  # Yaw rotation (turning in place)
+          axis: 3                    # Right stick horizontal axis
+          scale: 0.5
           offset: 0.0
