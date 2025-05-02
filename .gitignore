@@ -13,11 +13,6 @@ cmake_install.cmake
 .vscode/
 .idea/
 
-# Ignore Python bytecode
-__pycache__/
-*.pyc
-*.pyo
-
 # Ignore package-specific generated files
 *.swp
 *.bakdandan kokoro
@@ -35,12 +30,13 @@ devel/
 catkin_make/
 catkin_build/
 
-# Ignore VS Code workspace settings
-.vscode/
-
 # Ignore temporary files
 *.tmp
 *.temp
+
+# Ignore Python bytecode
+*.pyc
+*.pyo
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

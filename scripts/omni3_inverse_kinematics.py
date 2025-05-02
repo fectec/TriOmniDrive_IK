@@ -21,11 +21,11 @@ def build_kinematic_matrix(alphas_deg):
     ])
     return M
 
-def compute_wheel_angular_velocities(s_linear, wheel_radius):
+def compute_wheel_angular_velocities(s, wheel_radius):
     """
     Convert linear wheel speeds (m/s) to angular wheel speeds (rad/s).
     """
-    return s_linear / wheel_radius
+    return s / wheel_radius
 
 def main():
     # 1) Define wheel angles (degrees)
@@ -46,14 +46,14 @@ def main():
     v = np.array([vx, vy, omega])
 
     # 5) Compute linear wheel speeds s = [s1, s2, s3] (m/s)
-    s_linear = Minv @ v
-    print(f"\nExample usage:\n  v = [{vx}, {vy}, {omega}] → [s1, s2, s3] = {s_linear} (m/s)")
+    s = Minv @ v
+    print(f"\nExample usage:\n  v = [{vx}, {vy}, {omega}] → [s1, s2, s3] = {s} (m/s)")
 
     # 6) Convert to wheel angular velocities (rad/s)
-    wheel_radius = 0.05  # meters
-    s_angular = compute_wheel_angular_velocities(s_linear, wheel_radius)
+    wheel_radius = 0.0240   # meters
+    w = compute_wheel_angular_velocities(s, wheel_radius)
     print(f"\nWheel angular velocities (rad/s) for wheel radius {wheel_radius} m:")
-    print(f"  [ω1, ω2, ω3] = {s_angular}")
+    print(f"  [ω1, ω2, ω3] = {w}")
 
 if __name__ == "__main__":
     main()
