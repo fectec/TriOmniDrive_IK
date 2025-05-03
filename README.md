@@ -3,10 +3,12 @@
 <p align="justify">
 This repository contains the code to implement inverse kinematics on a three-wheeled omnidirectional robot.</p> 
 
-![Inverse kinematics on a three-wheeled omnidirectional robot demo](https://github.com/user-attachments/assets/1a640358-42fa-431d-b2d3-d7f69b7eaa03)
-
 <p align="justify">
 With this approach, velocity commands can be sent in the form of a ROS2 <code>Twist</code> message, specifying the desired linear velocities <code>Vx</code>, <code>Vy</code>, and angular velocity <code>ω</code>, which are then converted into individual wheel angular velocities.
+</p>
+
+<p align="center"> 
+  <img src="https://github.com/user-attachments/assets/1a640358-42fa-431d-b2d3-d7f69b7eaa03" alt="Inverse kinematics on a three-wheeled omnidirectional robot demo"/> 
 </p>
 
 <p align="justify">
