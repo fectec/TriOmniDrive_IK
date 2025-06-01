@@ -1,4 +1,4 @@
-# TriOmniDrive
+# Three-Wheeled Omnidirectional Robot Inverse Kinematics
 
 <p align="justify">
 This repository contains the code to implement inverse kinematics on a three-wheeled omnidirectional robot.</p> 
